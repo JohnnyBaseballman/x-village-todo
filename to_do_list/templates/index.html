@@ -47,6 +47,25 @@
         .btnRemove {
             right: 100px;
         }
+        /* When clicked on, add a background color and strike out text */
+        .checked {
+            background: rgb(136, 136, 136);
+            color: #fff;
+            text-decoration: line-through;
+        }
+        /* Add a "checked" mark when clicked on */
+        .checked::before {
+            content: '';
+            position: absolute;
+            border-color: #fff;
+            border-style: solid;
+            border-width: 0 2px 2px 0;
+            top: 10px;
+            left: 16px;
+            transform: rotate(45deg);
+            height: 15px;
+            width: 7px;
+        }
     </style>
 </head>
 
@@ -81,7 +100,7 @@
             <ul id="item-lists" class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Example: Finish WEB homework
-                    <span class="badge badge-primary badge-pill">2018/9/2</span>
+                    <span class="badge badge-primary badge-pill">Deadline:2018/9/2</span>
                 </li>
             </ul>
         </div>
@@ -318,6 +337,15 @@
             const recordId = $(this).attr('data-record-id');
             sendEditItemRequest(recordId);
         });
+
+        // Add a "checked" symbol when clicking on a list item
+        var list = document.querySelector('ul');
+        list.addEventListener('click', function(ev) {
+        if (ev.target.tagName === 'LI') {
+            ev.target.classList.toggle('checked');
+        }
+        }, false);
+
     </script>
 </body>
 
